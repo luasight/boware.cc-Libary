@@ -16,8 +16,8 @@ local library = {
     changed = {},
     folders = {
         main = "splix",
-        assets = "splix/assets",
-        configs = "splix/configs"
+        assets = "boware.cc/assets",
+        configs = "boware.cc/configs"
     },
     shared = {
         initialized = false,
