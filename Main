@@ -686,7 +686,7 @@ do
             --
             spawn(function()
                 while wait(0.1) do
-                    watermark_title.Text = string.format("boware.cc || uid : %u || ping : %i || fps : %u", 1, tostring(library.shared.ping), library.shared.fps)
+                    watermark_title.Text = string.format("boware.cc || ping : %i || fps : %u", 1, tostring(library.shared.ping), library.shared.fps)
                     window.watermark:UpdateSize()
                 end
             end)
