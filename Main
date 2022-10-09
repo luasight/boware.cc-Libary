@@ -1,3 +1,7 @@
+--[[ Credits
+    Matas#3535 @matas - Created UI
+    bored#9316 @wally hub user - Helped make library
+]]
 -- // Variables
 local ws = game:GetService("Workspace")
 local uis = game:GetService("UserInputService")
@@ -16,8 +20,8 @@ local library = {
     changed = {},
     folders = {
         main = "splix",
-        assets = "boware.cc/assets",
-        configs = "boware.cc/configs"
+        assets = "splix/assets",
+        configs = "splix/configs"
     },
     shared = {
         initialized = false,
@@ -181,6 +185,14 @@ do
                         end
                     end
                 end
+                --[[if typeof(v) == "Color3" then
+                    local found_theme = utility:Find(theme, v)
+                    if found_theme then
+                        themes[found_theme] = themes[found_theme] or {}
+                        themes[found_theme][i] = themes[found_theme][i]
+                        table.insert(themes[found_theme][i], instance)
+                    end
+                end]]
             end
             --
             if not instanceHidden then
@@ -363,7 +375,7 @@ do
         --
         theme.accent = accent
         --
-        local window = {pages = {}, isVisible = false, uibind = Enum.KeyCode.RightControl, currentPage = nil, fading = false, dragging = false, drag = Vector2.new(0,0), currentContent = {frame = nil, dropdown = nil, multibox = nil, colorpicker = nil, keybind = nil}}
+        local window = {pages = {}, isVisible = false, uibind = Enum.KeyCode.Z, currentPage = nil, fading = false, dragging = false, drag = Vector2.new(0,0), currentContent = {frame = nil, dropdown = nil, multibox = nil, colorpicker = nil, keybind = nil}}
         --
         local main_frame = utility:Create("Frame", {Vector2.new(0,0)}, {
             Size = utility:Size(0, size.X, 0, size.Y),
@@ -590,7 +602,7 @@ do
             window.watermark = {visible = true}
             --
             local info = info or {}
-            local watermark_name = info.name or info.Name or info.title or info.Title or string.format("boware.cc | dev | fps : %u", 1, 100, 200)
+            local watermark_name = info.name or info.Name or info.title or info.Title or string.format("$$ Splix || uid : %u || ping : %u || fps : %u", 1, 100, 200)
             --
             local text_bounds = utility:GetTextBounds(watermark_name, theme.textsize, theme.font)
             --
@@ -669,12 +681,12 @@ do
                 library.shared.ping = tonumber(string.split(stats.Network.ServerStatsItem["Data Ping"]:GetValueString(), " ")[1] .. "")
             end)
             --
-            watermark_title.Text = string.format("boware.cc | dev | fps : %u", 1, tostring(library.shared.ping), library.shared.fps)
+            watermark_title.Text = string.format("$$ Splix || uid : %u || ping : %i || fps : %u", 1, tostring(library.shared.ping), library.shared.fps)
             window.watermark:UpdateSize()
             --
             spawn(function()
                 while wait(0.1) do
-                    watermark_title.Text = string.format("boware.cc | dev | fps : %u", 1, tostring(library.shared.ping), library.shared.fps)
+                    watermark_title.Text = string.format("$$ Splix || uid : %u || ping : %i || fps : %u", 1, tostring(library.shared.ping), library.shared.fps)
                     window.watermark:UpdateSize()
                 end
             end)
@@ -683,7 +695,7 @@ do
         end
         --
         function window:KeybindsList(info)
-            window.keybindslist = {visible = true, keybinds = {}}
+            window.keybindslist = {visible = false, keybinds = {}}
             --
             local info = info or {}
             --
@@ -724,7 +736,7 @@ do
             })
             --
             local keybindslist_title = utility:Create("TextLabel", {Vector2.new(keybindslist_outline.Size.X/2,4), keybindslist_outline}, {
-                Text = "Keybinds",
+                Text = "- Keybinds -",
                 Size = theme.textsize,
                 Font = theme.font,
                 Color = theme.textcolor,
