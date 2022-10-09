@@ -867,7 +867,7 @@ do
             --
             function window.keybindslist:Update(updateType, updateValue)
                 if updateType == "Visible" then
-                    window.keybindslist.visible = updateValue
+                    window.keybindslist.visible = true
                     window.keybindslist:Visibility()
                 end
             end
